@@ -1,5 +1,5 @@
 import {Router} from "express"; 
-import { obtenerProducto, crearProducto, listarProductos, editarProducto, borrarProducto } from "../controllers/recetas.controllers";
+import { obtenerProducto, crearProducto, listarProductos, editarProducto, borrarProducto } from "../controllers/productos.controllers";
 import { check } from "express-validator";
 
 const router = Router();
@@ -18,9 +18,9 @@ router
      check('estado')
         .notEmpty()
         .withMessage("El estado es un dato obligatorio")
-        .isLength({ min: 2, max: 500 })
+        .isIn(['Pendiente', 'Entregado', 'Cancelado'])
         .withMessage(
-          "El estado debe tener entre 2 y 500 caracteres"
+          "El estado debe ser correcto"
         ),
       check("precio")
         .notEmpty()
@@ -44,7 +44,6 @@ router
       check('categoria')
         .notEmpty()
         .withMessage("Los categoria es un dato obligatorio")
-        .isLength({ min: 2, max: 10000 })
         .isIn(['Entrada','Plato principal','Postre','Bebida','Aperitivo'])
         .withMessage('La categoría elegida debe ser correcta'
         ),
@@ -71,9 +70,9 @@ router
      check('estado')
         .notEmpty()
         .withMessage("El estado es un dato obligatorio")
-        .isLength({ min: 2, max: 500 })
+        .isIn(['Pendiente', 'Entregado', 'Cancelado'])
         .withMessage(
-          "El estado debe tener entre 2 y 500 caracteres"
+          "El estado debe ser correcto"
         ),
       check("precio")
         .notEmpty()
@@ -97,7 +96,6 @@ router
       check('categoria')
         .notEmpty()
         .withMessage("Los categoria es un dato obligatorio")
-        .isLength({ min: 2, max: 10000 })
         .isIn(['Entrada','Plato principal','Postre','Bebida','Aperitivo'])
         .withMessage('La categoría elegida debe ser correcta'
         ),
@@ -110,3 +108,5 @@ router
     ],
     editarProducto)
   .delete(borrarProducto);
+
+  export default router;

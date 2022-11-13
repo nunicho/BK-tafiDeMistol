@@ -1,7 +1,5 @@
 import mongoose, {Schema} from "mongoose";
 
-
-//Schema es una clase de Moongose
 const productoSchema = new Schema({
     nombreProducto:{
         type: String,
