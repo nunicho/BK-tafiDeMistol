@@ -3,6 +3,7 @@ import morgan from "morgan"
 import cors from 'cors'
 import path from 'path'
 import productosRouter from './routes/productos.routes' 
+import pedidosRouter from './routes/pedidos.routes' 
 import './database'
 
 const app = express();
@@ -22,4 +23,5 @@ app.use(express.static(path.join(__dirname, '../public')))
 console.log(path.join(__dirname, '../public'))
 
 //rutas: nombre de dominio + ---- 
-app.use('/apirestaurante', productosRouter )
+app.use('/apirestaurante/pr', productosRouter )
+app.use('/apirestaurante/pe', pedidosRouter )
