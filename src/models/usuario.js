@@ -24,6 +24,15 @@ const usuarioSchema = new Schema({
         required:true,
         minLength:8,
         maxLength:10
+    },
+    estado:{
+        type:String,
+        required:true
+    },
+
+    perfil:{
+        type:String,
+        required:true
     }
 })
 

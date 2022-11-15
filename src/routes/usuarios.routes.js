@@ -35,6 +35,12 @@ router
         .withMessage(
           "La contraseña debe como minimo 8 caracteres y al menos una letra, un número y un símbolo especial"
         ),
+
+        check('estado')
+        .notEmpty(),
+
+        check('perfil')
+        .notEmpty(),
     ],
     crearUsuario);
 
@@ -52,7 +58,7 @@ router
      check('apellido')
         .notEmpty()
         .withMessage("El apellido es un dato obligatorio")
-        .isLength({ min: 8, max: 50 })
+        .isLength({ min: 2, max: 50 })
         .withMessage("El apellido de tener entre 2 y 50 caracteres"
         ),
      check('mail')
@@ -69,6 +75,11 @@ router
         .withMessage(
           "La contraseña debe como minimo 8 caracteres y al menos una letra, un número y un símbolo especial"
         ),
+        check('estado')
+        .notEmpty(),
+
+        check('perfil')
+        .notEmpty(),
     ],
     editarUsuario)
   .delete(borrarUsuario);
