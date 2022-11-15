@@ -10,7 +10,6 @@ import './database'
 const app = express();
 
 
-const app= express();
 
 app.set("port", process.env.PORT||4000)
 
@@ -33,5 +32,5 @@ console.log(path.join(__dirname, '../public'));
 //rutas: nombre de dominio + ---- 
 app.use('/apirestaurante/pr', productosRouter )
 app.use('/apirestaurante/pe', pedidosRouter )
-app.use('/apirestaurante/us', usuariosRouter
+app.use('/apirestaurante/us', usuariosRouter)
 
