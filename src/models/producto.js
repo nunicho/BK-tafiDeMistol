@@ -12,19 +12,19 @@ const productoSchema = new Schema({
         type:String,
         required:true,
         minLength:2,
-        maxLength:500
+        maxLength:50
     },
     precio:{
         type:Number,
         required:true,
         min: 1,
-        max: 10000
+        max: 20000
     },
      detalle:{
         type:String,
         required:true,
         minLength:2,
-        maxLength:10000 
+        maxLength:1000 
     },
     categoria:{
         type: String,

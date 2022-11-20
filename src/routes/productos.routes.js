@@ -18,9 +18,9 @@ router
      check('estado')
         .notEmpty()
         .withMessage("El estado es un dato obligatorio")
-        .isIn(['Pendiente', 'Entregado', 'Cancelado'])
+        .isLength({ min: 2, max: 50 })
         .withMessage(
-          "El estado debe ser correcto"
+          "El nombre del producto debe tener entre 2 y 50 caracteres"
         ),
       check("precio")
         .notEmpty()
@@ -70,9 +70,9 @@ router
      check('estado')
         .notEmpty()
         .withMessage("El estado es un dato obligatorio")
-        .isIn(['Pendiente', 'Entregado', 'Cancelado'])
+        .isLength({ min: 2, max: 50 })
         .withMessage(
-          "El estado debe ser correcto"
+          "El nombre del producto debe tener entre 2 y 50 caracteres"
         ),
       check("precio")
         .notEmpty()
