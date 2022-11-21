@@ -7,23 +7,22 @@ const usuarioSchema = new Schema({
         type: String,
         required:true,
         minLength:2,
-        maxLength:50, 
+        maxLength:20, 
     },
     apellido:{
         type: String,
         required:true,
         minLength:2,
-        maxLength:50, 
+        maxLength:20, 
     },
-    mail:{
+    email:{
         type:String,
         required:true
     },
-     password:{
+    contrasena:{
         type:String,
         required:true,
         minLength:8,
-        maxLength:10
     },
     estado:{
         type:String,
