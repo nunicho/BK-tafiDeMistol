@@ -21,13 +21,13 @@ router
         .isLength({ min: 2, max: 50 })
         .withMessage("El apellido de tener entre 2 y 50 caracteres"
         ),
-     check('mail')
+     check('email')
         .notEmpty()
         .withMessage("El mail es un dato obligatorio")
         .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
         .withMessage('Debe enviar un mail válido'
         ),
-      check('password')
+      check('contrasena')
         .notEmpty()
         .withMessage("El password es un dato obligatorio")
         .isLength({ min: 8 })
@@ -35,12 +35,19 @@ router
         .withMessage(
           "La contraseña debe como minimo 8 caracteres y al menos una letra, un número y un símbolo especial"
         ),
-
         check('estado')
-        .notEmpty(),
+        .notEmpty()
+        .withMessage("El Estado es un dato obligatorio")
+        .isIn(['Activo', 'Inactivo'])
+        .withMessage('El estado elegido debe ser correcto'
+        ),
 
         check('perfil')
-        .notEmpty(),
+        .notEmpty()
+        .withMessage("El Perfil es un dato obligatorio")
+        .isIn(['Cliente', 'Administrador'])
+        .withMessage('El perfil elegido debe ser correcto'
+        ),
     ],
     crearUsuario);
 
@@ -61,13 +68,13 @@ router
         .isLength({ min: 2, max: 50 })
         .withMessage("El apellido de tener entre 2 y 50 caracteres"
         ),
-     check('mail')
+     check('email')
         .notEmpty()
         .withMessage("El mail es un dato obligatorio")
         .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
         .withMessage('Debe enviar un mail válido'
         ),
-      check('password')
+      check('contrasena')
         .notEmpty()
         .withMessage("El password es un dato obligatorio")
         .isLength({ min: 8 })
@@ -76,10 +83,18 @@ router
           "La contraseña debe como minimo 8 caracteres y al menos una letra, un número y un símbolo especial"
         ),
         check('estado')
-        .notEmpty(),
+        .notEmpty()
+        .withMessage("El Estado es un dato obligatorio")
+        .isIn(['Activo', 'Inactivo'])
+        .withMessage('El estado elegido debe ser correcto'
+        ),
 
         check('perfil')
-        .notEmpty(),
+        .notEmpty()
+        .withMessage("El Perfil es un dato obligatorio")
+        .isIn(['Cliente', 'Administrador'])
+        .withMessage('El perfil elegido debe ser correcto'
+        ),
     ],
     editarUsuario)
   .delete(borrarUsuario);
