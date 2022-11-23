@@ -1,19 +1,19 @@
 import {Router} from "express"; 
-import { obtenerUsuario, crearUsuario, listarUsuarios, editarUsuario, borrarUsuario } from "../controllers/usuarios.controllers";
+import { obtenerCliente, crearCliente, listarClientes, editarCliente, borrarCliente } from "../controllers/clientes.controllers";
 import { check } from "express-validator";
 
 //ojo, Router no es lo mismo que router.
 const router = Router();
 
 router
-  .route("/usuarios")
-  .get(listarUsuarios)
+  .route("/clientes")
+  .get(listarClientes)
   .post([
-      check("nombreUsuario")
+      check("nombreCliente")
         .notEmpty()
-        .withMessage("El nombre del usuario es un dato obligatorio")
+        .withMessage("El nombre del cliente es un dato obligatorio")
         .isLength({ min: 2, max: 50 })
-        .withMessage("El nombre del usuario debe tener entre 2 y 50 caracteres"
+        .withMessage("El nombre del cliente debe tener entre 2 y 50 caracteres"
         ),
      check('apellido')
         .notEmpty()
@@ -49,18 +49,18 @@ router
         .withMessage('El perfil elegido debe ser correcto'
         ),
     ],
-    crearUsuario);
+    crearCliente);
 
 
 router
-  .route("/usuarios/:id")
-  .get(obtenerUsuario)
+  .route("/clientes/:id")
+  .get(obtenerCliente)
   .put([
-      check("nombreUsuario")
+      check("nombreCliente")
         .notEmpty()
-        .withMessage("El nombre del usuario es un dato obligatorio")
+        .withMessage("El nombre del cliente es un dato obligatorio")
         .isLength({ min: 2, max: 50 })
-        .withMessage("El nombre del usuario debe tener entre 2 y 50 caracteres"
+        .withMessage("El nombre del cliente debe tener entre 2 y 50 caracteres"
         ),
      check('apellido')
         .notEmpty()
@@ -96,7 +96,7 @@ router
         .withMessage('El perfil elegido debe ser correcto'
         ),
     ],
-    editarUsuario)
-  .delete(borrarUsuario);
+    editarCliente)
+  .delete(borrarCliente);
 
 export default router;

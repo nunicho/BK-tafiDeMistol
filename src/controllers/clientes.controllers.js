@@ -60,14 +60,14 @@ export const obtenerCliente = async (req, res)=>{
   }catch(error){
     console.log(error)
     res.status(404).json({
-      mensaje: 'Error no se pudo encontrar el usuario'
+      mensaje: 'Error no se pudo encontrar el cliente'
     })
   }
 }
-export const editarUsuario = async (req, res)=>{
+export const editarCliente = async (req, res)=>{
   try{
-    //buscar la usuario  por el id, luego modificar los datos con el body
-    await Usuario.findByIdAndUpdate(req.params.id,req.body);
+    //buscar el cliente  por el id, luego modificar los datos con el body
+    await Cliente.findByIdAndUpdate(req.params.id,req.body);
     const errores = validationResult(req);
     //errores.isEmpty() retorna true cuando no hay errores, retorna false cuando hay errores
     // pregunto si hay errores
@@ -78,27 +78,27 @@ export const editarUsuario = async (req, res)=>{
     }
      //responder al frontend
     res.status(200).json({
-      mensaje: 'El usuario fue editado correctamente'
+      mensaje: 'El cliente fue editado correctamente'
     })
   }catch(error){
     console.log(error)
     res.status(404).json({
-      mensaje: 'Error el usuario solicitado no pudo ser modificado'
+      mensaje: 'Error el cliente solicitado no pudo ser modificado'
     })
   }
 }
-export const borrarUsuario= async (req, res)=>{
+export const borrarCliente= async (req, res)=>{
   try{
-  //buscar una usuario por el id y borrar
-  await Usuario.findByIdAndDelete(req.params.id)
-  //responder al frontend si pude eliminar el usuario
+  //buscar un cliente por el id y borrar
+  await Cliente.findByIdAndDelete(req.params.id)
+  //responder al frontend si pude eliminar el cliente
   res.status(200).json({
-    mensaje: 'El usuario fue correctamente eliminado'
+    mensaje: 'El cliente fue correctamente eliminado'
   })
   }catch(error){
     console.log(error)
     res.status(404).json({
-      mensaje: 'Error el usuario solicitado no pudo ser eliminado'
+      mensaje: 'Error el cliente solicitado no pudo ser eliminado'
     })
   }
 }

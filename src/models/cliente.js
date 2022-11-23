@@ -2,8 +2,8 @@ import mongoose, {Schema} from "mongoose";
 
 
 //Schema es una clase de Moongose
-const usuarioSchema = new Schema({
-    nombreUsuario:{
+const clienteSchema = new Schema({
+    nombreCliente:{
         type: String,
         required:true,
         minLength:2,
@@ -36,6 +36,6 @@ const usuarioSchema = new Schema({
 })
 
 // aqui realizamos el modelo
-const Usuario = mongoose.model('usuario', usuarioSchema);
+const Cliente = mongoose.model('cliente', clienteSchema);
 
-export default Usuario;
+export default Cliente;
