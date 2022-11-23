@@ -33,4 +33,5 @@ console.log(path.join(__dirname, '../public'));
 app.use('/apirestaurante/pr', productosRouter )
 app.use('/apirestaurante/pe', pedidosRouter )
 app.use('/apirestaurante/us', usuariosRouter)
+app.use('/apirestaurante/cl', clientesRouter)
 
