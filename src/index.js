@@ -5,7 +5,7 @@ import path from 'path'
 import productosRouter from './routes/productos.routes' 
 import pedidosRouter from './routes/pedidos.routes'
 import usuariosRouter from './routes/usuarios.routes'
-import clientesRouter from '.routes/clientes.routes'
+import clientesRouter from './routes/clientes.routes'
 import './database'
 
 const app = express();
