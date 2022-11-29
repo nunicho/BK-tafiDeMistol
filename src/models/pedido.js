@@ -16,7 +16,13 @@ const pedidoSchema = new Schema({
         required:true,
         min: 1,
         max: 500000,
-    }  
+    },
+    nombreClientePedido:{
+        type: String,
+        required:true,
+        minLength:2,
+        maxLength:50, 
+    },
 
 })
 

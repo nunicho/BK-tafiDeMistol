@@ -34,6 +34,12 @@ router
                 throw new Error('El costo total debe estar entre 1 y 500000')
             }
         }),
+        check("nombreClientePedido")
+        .notEmpty()
+        .withMessage("El nombre del cliente es un dato obligatorio")
+        .isLength({ min: 2, max: 50 })
+        .withMessage("El nombre del cliente debe tener entre 2 y 50 caracteres"
+        ),
       ],
     crearPedido);
 
@@ -67,6 +73,12 @@ router
                 throw new Error('El costo total debe estar entre 1 y 500000')
             }
         }),
+        check("nombreClientePedido")
+        .notEmpty()
+        .withMessage("El nombre del cliente es un dato obligatorio")
+        .isLength({ min: 2, max: 50 })
+        .withMessage("El nombre del cliente debe tener entre 2 y 50 caracteres"
+        ),
       ],
     editarPedido)
   .delete(borrarPedido);
