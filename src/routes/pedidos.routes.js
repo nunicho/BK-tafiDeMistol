@@ -11,7 +11,7 @@ router
       check("detallePedido")
         .notEmpty()
         .withMessage("El detalle del pedido es un dato obligatorio")
-        .isLength({ min: 2, max: 500 })
+        .isLength({ min: 2, max: 5000 })
         .withMessage(
           "El detalle del pedido debe tener entre 2 y 500 caracteres"
         ),
@@ -44,7 +44,7 @@ router
       check("detallePedido")
         .notEmpty()
         .withMessage("El detalle del pedido es un dato obligatorio")
-        .isLength({ min: 2, max: 500 })
+        .isLength({ min: 2, max: 5000 })
         .withMessage(
           "El detalle del pedido debe tener entre 2 y 500 caracteres"
         ),

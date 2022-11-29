@@ -38,14 +38,14 @@ router
         check('estado')
         .notEmpty()
         .withMessage("El Estado es un dato obligatorio")
-        .isIn(['Activo', 'Inactivo'])
+        .isIn(['Familiar', 'Institucional'])
         .withMessage('El estado elegido debe ser correcto'
         ),
 
         check('perfil')
         .notEmpty()
         .withMessage("El Perfil es un dato obligatorio")
-        .isIn(['Cliente', 'Administrador'])
+        .isIn(['Sin restricciones', 'Celíaco, vegano, etc'])
         .withMessage('El perfil elegido debe ser correcto'
         ),
     ],
@@ -85,14 +85,14 @@ router
         check('estado')
         .notEmpty()
         .withMessage("El Estado es un dato obligatorio")
-        .isIn(['Activo', 'Inactivo'])
+        .isIn(['Familiar', 'Institucional'])
         .withMessage('El estado elegido debe ser correcto'
         ),
 
         check('perfil')
         .notEmpty()
         .withMessage("El Perfil es un dato obligatorio")
-        .isIn(['Cliente', 'Administrador'])
+        .isIn(['Sin restricciones', 'Celíaco, vegano, etc'])
         .withMessage('El perfil elegido debe ser correcto'
         ),
     ],

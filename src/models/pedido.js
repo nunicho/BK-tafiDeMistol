@@ -2,10 +2,10 @@ import mongoose, {Schema} from "mongoose";
 
 const pedidoSchema = new Schema({
     detallePedido:{
-        type:Array, // ¿Aquí debería ser Array?""
+        type: String, // ¿Aquí debería ser Array?""
         required:true,
         minLength:2,
-        maxLength:500, 
+        maxLength:5000, 
     },
     estado:{
         type:String,
