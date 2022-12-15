@@ -35,19 +35,6 @@ router
         .withMessage(
           "La contraseña debe como minimo 8 caracteres y al menos una letra, un número y un símbolo especial"
         ),
-        check('estado')
-        .notEmpty()
-        .withMessage("El Estado es un dato obligatorio")
-        .isIn(['Activo', 'Inactivo'])
-        .withMessage('El estado elegido debe ser correcto'
-        ),
-
-        check('perfil')
-        .notEmpty()
-        .withMessage("El Perfil es un dato obligatorio")
-        .isIn(['Cliente', 'Administrador'])
-        .withMessage('El perfil elegido debe ser correcto'
-        ),
     ],
     crearUsuario);
 
@@ -81,19 +68,6 @@ router
         .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
         .withMessage(
           "La contraseña debe como minimo 8 caracteres y al menos una letra, un número y un símbolo especial"
-        ),
-        check('estado')
-        .notEmpty()
-        .withMessage("El Estado es un dato obligatorio")
-        .isIn(['Activo', 'Inactivo'])
-        .withMessage('El estado elegido debe ser correcto'
-        ),
-
-        check('perfil')
-        .notEmpty()
-        .withMessage("El Perfil es un dato obligatorio")
-        .isIn(['Cliente', 'Administrador'])
-        .withMessage('El perfil elegido debe ser correcto'
         ),
     ],
     editarUsuario)

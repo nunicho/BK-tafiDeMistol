@@ -24,15 +24,6 @@ const usuarioSchema = new Schema({
         required:true,
         minLength:8,
     },
-    estado:{
-        type:String,
-        required:true
-    },
-
-    perfil:{
-        type:String,
-        required:true
-    }
 })
 
 // aqui realizamos el modelo
