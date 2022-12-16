@@ -11,12 +11,10 @@ const productoSchema = new Schema({
     estado:{
         type:String,
         required:true,
-        minLength:2,
-        maxLength:50
     },
     precio:{
         type:Number,
-        required:true,
+        required:true,  
         min: 1,
         max: 20000
     },
