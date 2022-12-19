@@ -30,9 +30,18 @@ export const crearUsuario = async(req, res) => {
       })
     }
 
-    //extraer del body los datos
-    console.log(req.body);
-    //agregar la validacion correspondiente
+
+const { email } = req.body;
+
+
+    let usuario = await Usuario.findOne({ email }); 
+    if (usuario) {
+      //si el usuario existe
+      return res.status(400).json({
+        mensaje: "ya existe un usuario con el correo enviado",
+      });
+    }
+
     const usuarioNuevo = new Usuario(req.body);
     //guardar ese usuario  en la BD
     await usuarioNuevo.save();
