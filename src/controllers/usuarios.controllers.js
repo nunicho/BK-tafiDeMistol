@@ -1,5 +1,6 @@
 import { validationResult } from "express-validator";
 import Usuario from "../models/usuario";
+import bcrypt from "bcryptjs";
 
 
 export const listarUsuarios = async(req, res) => {
@@ -31,7 +32,7 @@ export const crearUsuario = async(req, res) => {
     }
 
 
-const { email } = req.body;
+const { email, contrasena } = req.body;
 
 
     let usuario = await Usuario.findOne({ email }); 
@@ -44,6 +45,9 @@ const { email } = req.body;
 
     const usuarioNuevo = new Usuario(req.body);
     //guardar ese usuario  en la BD
+    const salt = bcrypt.genSaltSync();
+    usuarioNuevo.contrasena = bcrypt.hashSync(contrasena, salt);    
+    
     await usuarioNuevo.save();
     //responder al usuario que todo salió bien
     res.status(201).json({
