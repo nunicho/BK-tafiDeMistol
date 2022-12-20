@@ -7,11 +7,10 @@ export const listarClientes = async (req, res) => {
     const listaClientes = await Cliente.find();
     res.status(200).json(listaClientes);
   } catch (error) {
-    console.log(error);
     res.status(404).json({
       mensaje: "Error al intentar buscar los clientes",
     });
-  };
+  }
 };
 
 export const crearCliente = async (req, res) => {
@@ -21,7 +20,7 @@ export const crearCliente = async (req, res) => {
       return res.status(400).json({
         errores: errores.array(),
       });
-    };
+    }
 
     const { email, contrasena } = req.body;
 
@@ -30,7 +29,7 @@ export const crearCliente = async (req, res) => {
       return res.status(400).json({
         mensaje: "ya existe un cliente con el correo enviado",
       });
-    };
+    }
     const clienteNuevo = new Cliente(req.body);
     const salt = bcrypt.genSaltSync();
     clienteNuevo.contrasena = bcrypt.hashSync(contrasena, salt);
@@ -40,24 +39,21 @@ export const crearCliente = async (req, res) => {
       mensaje: "El cliente fue correctamente creado",
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       mensaje: "Error al intentar agregar un cliente",
     });
-  };
+  }
 };
 
 export const obtenerCliente = async (req, res) => {
   try {
-    console.log(req.params.id);
     const clienteBuscado = await Cliente.findById(req.params.id);
     res.status(200).json(clienteBuscado);
   } catch (error) {
-    console.log(error);
     res.status(404).json({
       mensaje: "Error no se pudo encontrar el cliente",
     });
-  };
+  }
 };
 export const editarCliente = async (req, res) => {
   try {
@@ -72,7 +68,6 @@ export const editarCliente = async (req, res) => {
       mensaje: "El cliente fue editado correctamente",
     });
   } catch (error) {
-    console.log(error);
     res.status(404).json({
       mensaje: "Error el cliente solicitado no pudo ser modificado",
     });
@@ -85,9 +80,8 @@ export const borrarCliente = async (req, res) => {
       mensaje: "El cliente fue correctamente eliminado",
     });
   } catch (error) {
-    console.log(error);
     res.status(404).json({
       mensaje: "Error el cliente solicitado no pudo ser eliminado",
     });
-  };
+  }
 };
