@@ -1,6 +1,6 @@
-import { validationResult } from "express-validator";
 import Cliente from "../models/cliente";
-
+import { validationResult } from "express-validator";
+// import bcrypt from "bcryptjs";
 
 export const login = async (req, res) => {
   try {
@@ -24,24 +24,25 @@ export const login = async (req, res) => {
         mensaje: "Correo o password invalido - correo",
       });
     }
-     if (contrasena !== cliente.contrasena) {
+     if (password !== cliente.contrasena) {
         return res.status(400).json({
           mensaje: "Correo o password invalido - password",
         });
       }
+
     // //verificar si el password corresponde con el pass encriptado en mi BD
-    const contrasenaValido = bcrypt.compareSync(contrasena, usuario.contrasena);
+    const passwordValido = bcrypt.compareSync(password, usuario.password);
     // // si no es valido el password
-    if (!contrasenaValido) {
+    if (!passwordValido) {
     return res.status(400).json({
     mensaje: "Correo o password invalido - password",
-    });
+     });
     }
   
 
     //responder que el usuario es correcto
     res.status(200).json({
-      mensaje: "El usuario existe",
+      mensaje: "El cliente existe",
       uid: cliente._id,
       nombre: cliente.nombre
     });
@@ -53,8 +54,7 @@ export const login = async (req, res) => {
   }
 };
 
-
-export const crearCliente= async (req, res) => {
+export const crearCliente = async (req, res) => {
   try {
     // manejar los errores de la validacion
     const errors = validationResult(req);
@@ -65,7 +65,7 @@ export const crearCliente= async (req, res) => {
       });
     }
 
-    const { email, contrasena } = req.body;
+    const { email, contrasena} = req.body;
 
     //verificar si el email ya existe
     let cliente = await Cliente.findOne({ email }); 
@@ -92,7 +92,7 @@ export const crearCliente= async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400).json({
-      mensaje: "El usuario no pudo ser creado",
+      mensaje: "El cliente no pudo ser creado",
     });
   }
 };
@@ -101,9 +101,9 @@ export const crearCliente= async (req, res) => {
 
 
 /*
-
 import { validationResult } from "express-validator";
 import Cliente from "../models/cliente";
+import bcrypt from "bcryptjs";
 
 
 export const listarClientes = async(req, res) => {
@@ -135,7 +135,7 @@ export const crearCliente = async(req, res) => {
     }
 
 
-const { email } = req.body;
+const { email, contrasena } = req.body;
 
 
     let cliente = await Cliente.findOne({ email }); 
@@ -148,6 +148,9 @@ const { email } = req.body;
     //agregar la validacion correspondiente
     const clienteNuevo = new Cliente(req.body);
     //guardar ese cliente en la BD
+    const salt = bcrypt.genSaltSync();
+    clienteNuevo.contrasena = bcrypt.hashSync(contrasena, salt);
+
     await clienteNuevo.save();
     //responder al cliente que todo salió bien
     res.status(201).json({
@@ -215,4 +218,5 @@ export const borrarCliente= async (req, res)=>{
     })
   }
 }
+
 */
