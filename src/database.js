@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
-const url = 'mongodb://localhost:27017/restaurante' // BD - LOCAL
-//const url = 'mongodb+srv://tafidemistol:tafidemistol@cluster0.6dbillk.mongodb.net/db-tafidemistol'
+//const url = 'mongodb://localhost:27017/restaurante' // BD - LOCAL
+const url = 'mongodb+srv://tafidemistol:tafidemistol2022@cluster0.8ffl46z.mongodb.net/tafidemistol'; 
+
 
 mongoose.connect(url);
 
