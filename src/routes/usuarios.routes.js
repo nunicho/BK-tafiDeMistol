@@ -2,7 +2,6 @@ import {Router} from "express";
 import { obtenerUsuario, crearUsuario, listarUsuarios, editarUsuario, borrarUsuario } from "../controllers/usuarios.controllers";
 import { check } from "express-validator";
 
-//ojo, Router no es lo mismo que router.
 const router = Router();
 
 router

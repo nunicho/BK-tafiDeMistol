@@ -1,5 +1,11 @@
-import {Router} from "express"; 
-import { obtenerPedido, crearPedido, listarPedidos, editarPedido, borrarPedido } from "../controllers/pedidos.controllers";
+import { Router } from "express";
+import {
+  obtenerPedido,
+  crearPedido,
+  listarPedidos,
+  editarPedido,
+  borrarPedido,
+} from "../controllers/pedidos.controllers";
 import { check } from "express-validator";
 
 const router = Router();
@@ -7,7 +13,8 @@ const router = Router();
 router
   .route("/pedidos")
   .get(listarPedidos)
-  .post([
+  .post(
+    [
       check("detallePedido")
         .notEmpty()
         .withMessage("El detalle del pedido es un dato obligatorio")
@@ -15,38 +22,39 @@ router
         .withMessage(
           "El detalle del pedido debe tener entre 2 y 500 caracteres"
         ),
-     check('estado')
+      check("estado")
         .notEmpty()
         .withMessage("El estado es un dato obligatorio")
-        .isIn(['Pendiente', 'Entregado', 'Cancelado'])
-        .withMessage(
-          "El estado debe ser correcto"
-        ),
+        .isIn(["Pendiente", "Entregado", "Cancelado"])
+        .withMessage("El estado debe ser correcto"),
       check("costoTotal")
         .notEmpty()
         .withMessage("El costo total es un dato obligatorio")
         .isNumeric()
-        .withMessage('El costo total debe ser un numero')
-        .custom((value)=>{
-            if(value>= 1 && value <= 500000){
-                return true;
-            }else{
-                throw new Error('El costo total debe estar entre 1 y 500000')
-            }
+        .withMessage("El costo total debe ser un numero")
+        .custom((value) => {
+          if (value >= 1 && value <= 500000) {
+            return true;
+          } else {
+            throw new Error("El costo total debe estar entre 1 y 500000");
+          }
         }),
-        check("nombreClientePedido")
+      check("nombreClientePedido")
         .notEmpty()
         .withMessage("El nombre del cliente es un dato obligatorio")
         .isLength({ min: 2, max: 50 })
-        .withMessage("El nombre del cliente debe tener entre 2 y 50 caracteres"
+        .withMessage(
+          "El nombre del cliente debe tener entre 2 y 50 caracteres"
         ),
-      ],
-    crearPedido);
+    ],
+    crearPedido
+  );
 
 router
   .route("/pedidos/:id")
   .get(obtenerPedido)
-  .put([
+  .put(
+    [
       check("detallePedido")
         .notEmpty()
         .withMessage("El detalle del pedido es un dato obligatorio")
@@ -54,33 +62,33 @@ router
         .withMessage(
           "El detalle del pedido debe tener entre 2 y 500 caracteres"
         ),
-     check('estado')
+      check("estado")
         .notEmpty()
         .withMessage("El estado es un dato obligatorio")
-        .isIn(['Pendiente', 'Entregado', 'Cancelado'])
-        .withMessage(
-          "El estado debe ser correcto"
-        ),
+        .isIn(["Pendiente", "Entregado", "Cancelado"])
+        .withMessage("El estado debe ser correcto"),
       check("costoTotal")
         .notEmpty()
         .withMessage("El costo total es un dato obligatorio")
         .isNumeric()
-        .withMessage('El costo total debe ser un numero')
-        .custom((value)=>{
-            if(value>= 1 && value <= 500000){
-                return true;
-            }else{
-                throw new Error('El costo total debe estar entre 1 y 500000')
-            }
+        .withMessage("El costo total debe ser un numero")
+        .custom((value) => {
+          if (value >= 1 && value <= 500000) {
+            return true;
+          } else {
+            throw new Error("El costo total debe estar entre 1 y 500000");
+          }
         }),
-        check("nombreClientePedido")
+      check("nombreClientePedido")
         .notEmpty()
         .withMessage("El nombre del cliente es un dato obligatorio")
         .isLength({ min: 2, max: 50 })
-        .withMessage("El nombre del cliente debe tener entre 2 y 50 caracteres"
+        .withMessage(
+          "El nombre del cliente debe tener entre 2 y 50 caracteres"
         ),
-      ],
-    editarPedido)
+    ],
+    editarPedido
+  )
   .delete(borrarPedido);
 
-  export default router;
+export default router;

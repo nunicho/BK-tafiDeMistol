@@ -2,116 +2,93 @@ import { validationResult } from "express-validator";
 import Usuario from "../models/usuario";
 import bcrypt from "bcryptjs";
 
-
-export const listarUsuarios = async(req, res) => {
-    try {
-        //buscar todas los usuarios en la BD
-        const listaUsuarios = await Usuario.find();
-        //responder al usuario que todo salió bien
-        res.status(200).json(listaUsuarios)
-      } catch (error) {
-        console.log(error);
-        res.status(404).json({
-            mensaje: 'Error al intentar buscar los usuarios'
-        })
-      }
-
-
+export const listarUsuarios = async (req, res) => {
+  try {
+    const listaUsuarios = await Usuario.find();
+    res.status(200).json(listaUsuarios);
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      mensaje: "Error al intentar buscar los usuarios",
+    });
+  }
 };
 
-export const crearUsuario = async(req, res) => {
+export const crearUsuario = async (req, res) => {
   try {
-    //manejar los errores de express-validator
     const errores = validationResult(req);
-    //errores.isEmpty() retorna true cuando no hay errores, retorna false cuando hay errores
-    // pregunto si hay errores
-    if(!errores.isEmpty()){
+    if (!errores.isEmpty()) {
       return res.status(400).json({
-        errores: errores.array()
-      })
+        errores: errores.array(),
+      });
     }
 
+    const { email, contrasena } = req.body;
 
-const { email, contrasena } = req.body;
-
-
-    let usuario = await Usuario.findOne({ email }); 
+    let usuario = await Usuario.findOne({ email });
     if (usuario) {
-      //si el usuario existe
       return res.status(400).json({
         mensaje: "ya existe un usuario con el correo enviado",
       });
     }
 
     const usuarioNuevo = new Usuario(req.body);
-    //guardar ese usuario  en la BD
     const salt = bcrypt.genSaltSync();
-    usuarioNuevo.contrasena = bcrypt.hashSync(contrasena, salt);    
-    
+    usuarioNuevo.contrasena = bcrypt.hashSync(contrasena, salt);
+
     await usuarioNuevo.save();
-    //responder al usuario que todo salió bien
     res.status(201).json({
-        mensaje: 'El usuario fue correctamente creado'
-    })
+      mensaje: "El usuario fue correctamente creado",
+    });
   } catch (error) {
     console.log(error);
     res.status(400).json({
-        mensaje: 'Error al intentar agregar una usuario'
-    })
+      mensaje: "Error al intentar agregar una usuario",
+    });
   }
 };
 
-
-export const obtenerUsuario = async (req, res)=>{
-  try{
-    //obtener el parametro
-    console.log(req.params.id)
-    //pedirle a la BD buscar el documento que coincide con el id del parametro
+export const obtenerUsuario = async (req, res) => {
+  try {
+    console.log(req.params.id);
     const usuarioBuscado = await Usuario.findById(req.params.id);
-    //responder con la usuario encontrada
     res.status(200).json(usuarioBuscado);
-  }catch(error){
-    console.log(error)
+  } catch (error) {
+    console.log(error);
     res.status(404).json({
-      mensaje: 'Error no se pudo encontrar el usuario'
-    })
+      mensaje: "Error no se pudo encontrar el usuario",
+    });
   }
-}
-export const editarUsuario = async (req, res)=>{
-  try{
-    //buscar la usuario  por el id, luego modificar los datos con el body
-    await Usuario.findByIdAndUpdate(req.params.id,req.body);
+};
+export const editarUsuario = async (req, res) => {
+  try {
+    await Usuario.findByIdAndUpdate(req.params.id, req.body);
     const errores = validationResult(req);
-    //errores.isEmpty() retorna true cuando no hay errores, retorna false cuando hay errores
-    // pregunto si hay errores
-    if(!errores.isEmpty()){
+    if (!errores.isEmpty()) {
       return res.status(400).json({
-        errores: errores.array()
-      })
+        errores: errores.array(),
+      });
     }
-     //responder al frontend
     res.status(200).json({
-      mensaje: 'El usuario fue editado correctamente'
-    })
-  }catch(error){
-    console.log(error)
+      mensaje: "El usuario fue editado correctamente",
+    });
+  } catch (error) {
+    console.log(error);
     res.status(404).json({
-      mensaje: 'Error el usuario solicitado no pudo ser modificado'
-    })
+      mensaje: "Error el usuario solicitado no pudo ser modificado",
+    });
   }
-}
-export const borrarUsuario= async (req, res)=>{
-  try{
-  //buscar una usuario por el id y borrar
-  await Usuario.findByIdAndDelete(req.params.id)
-  //responder al frontend si pude eliminar el usuario
-  res.status(200).json({
-    mensaje: 'El usuario fue correctamente eliminado'
-  })
-  }catch(error){
-    console.log(error)
+};
+export const borrarUsuario = async (req, res) => {
+  try {
+    await Usuario.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      mensaje: "El usuario fue correctamente eliminado",
+    });
+  } catch (error) {
+    console.log(error);
     res.status(404).json({
-      mensaje: 'Error el usuario solicitado no pudo ser eliminado'
-    })
+      mensaje: "Error el usuario solicitado no pudo ser eliminado",
+    });
   }
-}
+};
